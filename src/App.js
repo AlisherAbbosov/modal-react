@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import ModalRef from "./Components/ModalRef/ModalRef";
+import ModalState from "./Components/ModalState/ModalState";
 
 function App() {
+  const [state, setState] = React.useState(false);
+
+  const modalRef = React.useRef("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button className="show-modal" onClick={() => setState(true)}>
+        Show modal with <span className="strong">useState</span>
+      </button>
+
+      <button
+        className="show-modal"
+        onClick={() => modalRef.current.classList.remove("hidden")}
+      >
+        Show modal with <span className="strong">useEffect</span>
+      </button>
+
+      <ModalRef ref={modalRef} />
+      <ModalState state={state} setState={setState} />
     </div>
   );
 }
